@@ -1,0 +1,142 @@
+% ----------
+% A LaTeX template for course project reports
+% 
+% This template is modified from "Tech Report ala MIT AI Lab (1981)"
+% 
+% ----------
+\documentclass[12pt, letterpaper, twoside]{article}
+\usepackage{geometry}
+\usepackage[utf8]{inputenc}
+\usepackage[english]{babel}
+\usepackage[runin]{abstract}
+\usepackage{titling}
+\usepackage{booktabs}
+\usepackage{fancyhdr}
+\usepackage{helvet}
+\usepackage{csquotes}
+\usepackage{graphicx}
+\usepackage{blindtext}
+\usepackage{parskip}
+\usepackage{etoolbox}
+
+
+\input{preamble.tex}
+
+% ----------
+% Variables
+% ----------
+
+\title{\textbf{Computational Photography Course Project:\\Gesture recognition}} % Full title of your tech report
+\runningtitle{On Gesture recognition} % Short title
+\author{Saawi Baloch} % Full list of authors
+\runningauthor{Student Name 3 et al.} % Short list of authors
+\affiliation{Ontario Tech University} % Affiliation e.g. University or Company
+\department{Faculty of Science, Computer Science} % Department or Office
+\memoid{Project Group: Independant} % Project group ID that were shared with the class earlier.
+\theyear{2024} % year of the tech report
+\mydate{April  2, 2024} %the date
+
+
+% ----------
+% actual document
+% ----------
+\begin{document}
+\maketitle
+
+\begin{abstract}
+    \noindent
+    
+    This project introduces an interactive hand exercise application designed to guide users through a series of hand movements aimed at alleviating pain and improving hand flexibility. By leveraging advanced computer vision technologies, including OpenCV and MediaPipe, the application detects specific hand gestures in real-time and provides immediate visual feedback through a user-friendly interface. This report outlines the related work, methodology, results, and discussions of the project.
+
+\end{abstract}
+
+\vspace{2.5cm}
+
+\thispagestyle{firstpage}
+
+\pagebreak
+
+% ----------
+% End of first page
+% ----------
+
+\newgeometry{} % Redefine geometries (normal margins)
+
+\section{Introduction}
+\label{sec:intro}
+    In recent years, the blend of computer vision technology with healthcare has become a dynamic and productive field, bringing forth creative approaches to traditional challenges in patient treatment and rehabilitation. A key driver of this progress is gesture recognition technology, notable for its ability to offer non-invasive, interactive, and captivating therapeutic options. This project leverages the strengths of gesture recognition to develop an accessible application that leads users through a sequence of hand exercises. These exercises are crafted to mitigate symptoms related to chronic hand issues, boost flexibility, and improve hand function overall.
+
+    Hand exercises play a pivotal role in rehabilitation strategies for individuals dealing with ailments like arthritis, carpal tunnel syndrome, and various musculoskeletal conditions. Engaging in routine, structured exercises can markedly alleviate discomfort, expand mobility, and fortify the muscles in the hands. Nonetheless, the success of these exercises is heavily contingent upon the precision of the movements executed and the regularity of the regimen. Conventional approaches to supervising these exercises typically depend on in-person physical therapy appointments or instructional guides, which might lack the immediacy of feedback required for adjusting and refining the execution of movements.
+    
+    Acknowledging the shortcomings of existing practices, this initiative seeks to utilize state-of-the-art gesture recognition technology to craft an interactive platform that delivers instant visual feedback to users. This is achieved through the integration of OpenCV, a prominent library for real-time computer vision, and MediaPipe, an advanced framework designed for constructing multimodal (audio, video, and sensor) applied machine learning pipelines. The application is adept at precisely monitoring hand movements and identifying distinct gesture patterns. Every recognized gesture is linked to a specific hand exercise, enabling the system to steer the user through a customized exercise routine tailored to their needs.
+    
+    This report details the development of the gesture-based hand exercise program, from the conceptualization and design of the gesture recognition system to the implementation and testing of the interactive application. Through a combination of technical innovation and a deep understanding of the therapeutic needs it addresses, this project represents a significant step forward in the application of computer vision technologies to the field of physical rehabilitation.
+
+\section{Related Work}
+\label{sec:conc}
+    The integration of gesture recognition in health and rehabilitation represents a growing field that combines advancements in computer vision, artificial intelligence, and human-computer interaction. This section briefly reviews the evolution of gesture recognition technologies and their application in therapeutic contexts, setting the stage for this project's contribution.
+    
+    \textbf{Gesture Recognition Technologies}
+    \\Gesture recognition has evolved from early reliance on wearable sensors to sophisticated camera-based systems enabled by developments in machine learning. Notably, the introduction of depth-sensing technology, such as that used in Microsoft's Kinect, marked a significant leap forward, allowing for the accurate tracking of complex human movements without direct physical contact.
+    
+    \textbf{Health and Rehabilitation Applications}
+    \\Gesture recognition has been applied in various healthcare settings, including interactive rehabilitation, where it offers a unique blend of engagement and non-invasiveness. Interactive systems that provide real-time feedback have shown potential in enhancing rehabilitation outcomes by motivating patients and ensuring the accuracy of prescribed exercises. However, the application to hand rehabilitation specifically has seen limited exploration, highlighting an opportunity for targeted development in this area.
+    
+    \textbf{This Project's Context}
+    \\This project leverages OpenCV and MediaPipe to address the gap in hand rehabilitation through a webcam-based system that guides users through precise hand exercises. By utilizing these advanced computer vision technologies, the project aims to make hand rehabilitation exercises more accessible, offering a novel tool for improving hand mobility and strength outside of traditional clinical environments.
+
+\section{Methodology}
+    This project aims to create an interactive hand exercise program using gesture recognition technology. The methodology encompasses hardware setup, software development, and the application of computer vision and machine learning techniques for gesture recognition. The end goal is to guide users through a series of hand exercises aimed at improving hand flexibility and strength.
+
+    \textbf{Hardware and Software Requirements}
+    \begin{itemize}
+        \item Hardware: The system requires a standard webcam and a computer capable of processing real-time video feeds.
+        \item Software: The application is developed in Python, utilizing OpenCV for image processing and MediaPipe for hand tracking and gesture recognition. PIL (Python Imaging Library) is used for rendering text and emojis on the display.
+    Gesture Recognition with MediaPipe
+        \item MediaPipe Hands: This framework provides real-time hand tracking by identifying and tracking 21 landmarks on each hand. The application processes the video feed from the webcam, converting it into RGB format for MediaPipe to analyze.
+        \item Gesture Identification: Custom functions analyze the positions of hand landmarks to recognize specific gestures. Each gesture corresponds to a hand exercise, and the system maps these gestures to visual feedback shown to the user.
+    \end{itemize}
+    \textbf{Application Design}
+    \begin{itemize}
+        \item User Interface: The application presents a simple and intuitive interface. It displays instructions, the user's hand with tracked landmarks, and visual feedback in the form of emojis corresponding to recognized gestures.
+        \item Feedback Mechanism: Upon recognizing a gesture, the system updates the display with the corresponding emoji. This instant feedback encourages correct execution of exercises.
+    \end{itemize}
+    \textbf{Exercise Sequence Implementation}
+    \begin{itemize}
+        \item Exercise Registry: A predefined set of exercises is encoded into the system, each associated with a specific hand gesture.
+        \item Shuffling and Execution: Exercises are presented in a randomized order to keep the routine engaging. The system tracks the user's progress through the exercise set, ensuring a comprehensive workout of the hand muscles.
+    \end{itemize}
+    \textbf{Development Process}
+    \begin{itemize}
+        \item Prototyping: Initial development focused on integrating MediaPipe with a basic Python script to establish real-time hand tracking.
+        \item  Gesture Recognition Algorithm Development: Subsequent development involved creating algorithms to recognize specific hand gestures from the tracked landmarks.
+        \item User Interface and Feedback: The final phase involved developing the user interface and feedback mechanism, ensuring the system was user-friendly and effective in guiding exercises.
+    \end{itemize}
+\section{Results}
+
+    Results
+    The deployment of the gesture-based hand exercise program yielded promising results across several dimensions, including gesture recognition accuracy, user engagement, and potential therapeutic benefits. These findings underscore the application's effectiveness and its viability as a tool for hand rehabilitation and strengthening.
+    
+    \textbf{Gesture Recognition Accuracy}
+    \\The system demonstrated a high degree of accuracy in recognizing predefined hand gestures, thanks to the robust capabilities of the MediaPipe framework. This high level of accuracy ensured that users received timely and relevant feedback, essential for the effective completion of hand exercises.
+
+\section{Discussion and Conclusions}
+    The development and initial testing of the gesture-based hand exercise program have provided valuable insights into the feasibility and effectiveness of using computer vision and machine learning for rehabilitative applications. The project demonstrated a high level of gesture recognition accuracy and user engagement, suggesting that such technologies can play a significant role in promoting physical well-being through interactive exercises. This section discusses the implications of these findings, the limitations encountered, and potential future work.
+
+    \textbf{Limitations}
+    \\While the project did well in accurately recognizing gestures, it could only recognize a few hand gestures. This points out the need to improve the gesture recognition algorithms so they work well under more varied physical and environmental situations.
+    
+    \textbf{Future Work}
+    \\To address the identified limitation and build on the current project's success, several avenues for future work are proposed:
+
+    \begin{itemize}
+        \item Algorithm Optimization: Enhance the gesture recognition algorithms to improve accuracy across diverse user demographics and under varied lighting conditions.
+        \item Expanded Exercise Set: Include a broader range of hand exercises to target different aspects of hand health and functionality, potentially incorporating feedback from physical therapy professionals.
+        \item Mobile Platform Deployment: Explore the adaptation and deployment of the application on mobile platforms to increase accessibility and convenience.
+    \end{itemize}
+    
+\section{Conclusions}
+    The gesture-based hand exercise program represents a significant step forward in the application of computer vision and machine learning technologies to the field of rehabilitation. By providing an engaging, effective, and accessible means of guiding hand exercises, the project has the potential to enhance the quality of life for individuals seeking to improve hand health. Looking forward, the project sets the groundwork for further innovation in the integration of technology and healthcare, promising to expand the possibilities for home-based rehabilitation and therapeutic practices.
+\end{document}
+
+% ----------
